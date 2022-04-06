@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue2 search and sort</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+<div id="app">
+    <template v-if="error">
+        <p>An error has occurred. Plse try again later.</p>
+    </template>
+
+    <template v-if="!loaded">
+        <p>Loading...</p>
+    </template>
+    <template v-else>
+        <label for="data-search">Search</label>
+        <input type="text" v-model="search" placeholder="Search..." id="data-search" />
+        <p v-if="search !== ''">{{ searchResults }} result(s) found.</p>
+
+        <pre>debug: sort={{currentSort}}, dir={{currentSortDir}}, page={{page+1}}</pre>
+
+        <template v-if="sortSearchPaginate.length > 0">
+            <table>
+                <thead>
+                <tr>
+                    <th @click="sort('company')">Company</th>
+                    <th @click="sort('contact')">Contact</th>
+                    <th @click="sort('address')">Address</th>
+                    <th @click="sort('date')">Date</th>
+                </tr>
+                </thead>
+                    <tbody>
+                    <template v-for="item in sortSearchPaginate">
+                    <tr>
+                        <td>{{ item.company }}</td>
+                        <td>{{ item.contact }}</td>
+                        <td>{{ item.address }}</td>
+                        <td>{{ item.date }}</td>
+                    </tr>
+                    </template>
+                    </tbody>
+            </table>
+
+            <button v-for="n in totalPages" @click="setPage(n)">{{ n }}</button>
+        </template>
+
+        <p v-if="sortSearchPaginate.length === 0">No results found.</p>
+
+        <hr>
+        <pre>debug: sort={{currentSort}}, dir={{currentSortDir}}, page={{page+1}}</pre>
+    </template>
+</div>
+</body>
+</html>
