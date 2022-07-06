@@ -9,7 +9,7 @@ new Vue({
 			searchResults: '',
 			currentSort: 'date',
 			currentSortDir: 'asc',
-			pageSize: 10,
+			pageSize: 15,
 			page: 0,
 			totalPages: 0
 		}
